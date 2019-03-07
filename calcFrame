@@ -1,0 +1,98 @@
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class calcFrame {
+
+ private JFrame frame;
+ private JTextField vatAmount;
+ private JTextField amount;
+ private JTextField result;
+ /**
+  * Launch the application.
+  */
+ public static void main(String[] args) {
+  EventQueue.invokeLater(new Runnable() {
+   public void run() {
+    try {
+     calcFrame window = new calcFrame();
+     window.frame.setVisible(true);
+    } catch (Exception e) {
+     e.printStackTrace();
+    }
+   }
+  });
+ }
+ /**
+  * Create the application.
+  */
+ public calcFrame() {
+  initialize();
+ }
+ /**
+  * Initialize the contents of the frame.
+  */
+ private void initialize() {
+  frame = new JFrame();
+  frame.setBackground(Color.LIGHT_GRAY);
+  frame.setBounds(100, 100, 450, 300);
+  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  frame.getContentPane().setLayout(null);
+  
+  JButton btnCalculateVat = new JButton("Calculate Vat");
+  btnCalculateVat.addActionListener(new ActionListener() {
+   public void actionPerformed(ActionEvent arg0) {
+    double vatam,am,res;
+    try {
+     vatam = Double.parseDouble(vatAmount.getText());
+     am = Double.parseDouble(amount.getText());
+     res = am + (am * vatam/100);
+     result.setText(Double.toString(res));
+    }
+    catch(Exception e) {
+     JOptionPane.showMessageDialog(null, "Please enter valid number.");
+    }
+   }
+  });
+  btnCalculateVat.setBounds(151, 114, 116, 25);
+  frame.getContentPane().add(btnCalculateVat);
+  
+  vatAmount = new JTextField();
+  vatAmount.setBounds(243, 13, 116, 22);
+  frame.getContentPane().add(vatAmount);
+  vatAmount.setColumns(10);
+  
+  amount = new JTextField();
+  amount.setBounds(243, 48, 116, 22);
+  frame.getContentPane().add(amount);
+  amount.setColumns(10);
+  
+  JLabel lblEnterTheVat = new JLabel("Enter the vat amount :");
+  lblEnterTheVat.setBounds(71, 16, 141, 16);
+  frame.getContentPane().add(lblEnterTheVat);
+  
+  JLabel lblEnterTheAmount = new JLabel("Enter the amount of cash :");
+  lblEnterTheAmount.setBounds(71, 51, 160, 16);
+  frame.getContentPane().add(lblEnterTheAmount);
+  
+  JLabel label = new JLabel("%");
+  label.setBounds(364, 16, 21, 16);
+  frame.getContentPane().add(label);
+  
+  result = new JTextField();
+  result.setBounds(206, 177, 116, 22);
+  frame.getContentPane().add(result);
+  result.setColumns(10);
+  
+  JLabel lblTheResultIs = new JLabel("The result is:");
+  lblTheResultIs.setBounds(102, 180, 92, 16);
+  frame.getContentPane().add(lblTheResultIs);
+ }
+}
